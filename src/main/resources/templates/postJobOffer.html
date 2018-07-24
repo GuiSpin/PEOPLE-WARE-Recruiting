@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Job Offer</title>
+</head>
+<body>
+
+    <div th:replace="head"></div>
+    <div class="container">
+        <div class="align-content-center" th:fragment="postJobOffer">
+            <H3 class="alignt-content-center">Post Job Offer</H3>
+            <form id="form" action="#" th:action="@{/postJobOffer}" th:object="${jobOffer}" method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label th:for="companyName">Company Name</label>
+                        <input class="form-control" type="text" id="companyName" name="companyName" th:field="*{companyName}"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label th:for="companyContactNumber">Company Contact Number</label>
+                        <input class="form-control" type="text" id="companyContactNumber" name="companyContactNumber" th:field="*{companyContactNumber}"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label th:for="jobTitle">Job Title</label>
+                        <input class="form-control" type="text" id="jobTitle" name="jobTitle" th:field="*{jobTitle}"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label th:for="jobTitle">Job Description</label>
+                        <input class="form-control" type="text" id="jobDescription" name="jobDescription" th:field="*{jobDescription}"/>
+                    </div>
+                </div>
+                <div class="form-group form-row">
+                    <div class="col-md-8">
+                        <label for="salaryRange">Salary Range</label>
+                        <div class="form-row" id="salaryRange">
+                            <div class="col-md-4">
+                             <input class="form-control" type="text"  id="salaryRangeMin" th:field="*{salaryRangeMin}">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" type="text"  id="salaryRangeMax" th:field="*{salaryRangeMax}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="workingTime">Working Time</label>
+                        <select id="workingTime" class="form-control" th:field="*{workingTime}">
+                            <option value="fulltime">Full-Time</option>
+                            <option value="parttime">Part-Time</option>
+                        </select>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Academic Degree</th>
+                        <th scope="col">
+                            <button class="form-control" type="submit" name="addAcademicRow">Add AcademicDegree</button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="academicDegree,academicDegreeStat : *{academicDegreeList}">
+                        <td>
+                            <select class="form-control" th:field="*{academicDegreeList[__${academicDegreeStat.index}__].academicDegreeName}">
+                                <option value="bachelorCS">Bachelor in Computer Science</option>
+                                <option value="bachelorE">Bachelor in Economy</option>
+                                <option value="mbaCS">MBA in ComputerScience</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="form-control" type="submit" name="removeAcademicRow"
+                                    th:value="${academicDegreeStat.index}">Remove row</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Skill Name</th>
+                        <th scope="col">Skill Level</th>
+                        <th scope="col">
+                            <button class="form-control" type="submit" name="addSkillRow">Add Skill</button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="requirement,requirementStat : *{requirementsList}">
+                        <td>
+                            <select class="form-control" th:field="*{requirementsList[__${requirementStat.index}__].name}">
+                                <option value="Java">Java</option>
+                                <option value="Oracle">Oracle</option>
+                                <option value="Git">Git</option>
+                                <option value="Javascript">Javascript</option>
+                                <option value="JSP">JSP</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control" th:field="*{requirementsList[__${requirementStat.index}__].level}">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="form-control" type="submit" name="removeSkillRow"
+                                    th:value="${requirementStat.index}">Remove row</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <button name="save" class="form-control">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="footer"></div>
+</body>
+</html>

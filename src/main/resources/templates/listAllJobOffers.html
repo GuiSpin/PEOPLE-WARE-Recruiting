@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List All Job Offers</title>
+</head>
+<body>
+    <div th:replace="head"></div>
+    <div class="container" th:fragment="menu">
+        <H3  class="text-center"> List All Job Offers</H3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Company Contact</th>
+                    <th scope="col">Job Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="job : ${jobOfferList}">
+                    <td th:text="${{job.companyName}}"></td>
+                    <td th:text="${{job.companyContactNumber}}"></td>
+                    <td th:text="${{job.jobTitle}}"></td>
+                    <td > <a th:href="@{/jobOfferDetail/{jobId}(jobId=${job.Id})}"><label>Details</label></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:replace="footer"></div>
+</body>
+</html>

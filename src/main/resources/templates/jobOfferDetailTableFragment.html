@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div  th:fragment="jobOfferDetailTableFragment">
+        <table class="table">
+            <thead >
+            <tr>
+                <th scope="col">Job Title</th>
+                <th scope="col">Job Description</th>
+                <th scope="col">Salary Range</th>
+                <th scope="col">Working Time</th>
+                <th scope="col">Academic Degree</th>
+                <th scope="col">Requirements</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="jobOffer : ${jobOfferList}">
+                <td th:text="${{jobOffer.jobTitle}}">13/01/2011</td>
+                <td th:text="${{jobOffer.jobDescription}}">yes</td>
+                <td th:text="${{jobOffer.salaryRangeMin}} + '-' + ${{jobOffer.salaryRangeMax}}">yes</td>
+                <td th:text="${{jobOffer.workingTime}}">yes</td>
+                <td>
+                    <table>
+                        <tbody>
+                        <tr th:each="academicDegree,academicDegreeStatStat : ${jobOffer.academicDegreeList}">
+                            <td th:text="${academicDegree.academicDegreeName}">Thymus Thymi</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tbody>
+                        <tr th:each="requirement,requirementsStat : ${jobOffer.requirementsList}">
+                            <td th:text="${requirement.name}">Thymus Thymi</td>
+                            <td th:text="${requirement.level}">Thymus Thymi</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

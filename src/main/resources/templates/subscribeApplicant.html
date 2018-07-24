@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subscribe Aplicant</title>
+</head>
+<body>
+
+    <div th:replace="head"></div>
+    <div class="container">
+        <div class="align-content-center" th:fragment="subscribeApplicant">
+            <H3 class="alignt-content-center">Subscribe Applicant</H3>
+            <form id="form" action="#" th:action="@{/subscribeApplicant}" th:object="${applicant}" method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label th:for="fullname">Fullname</label>
+                        <input class="form-control" type="text" id="fullname" name="fullname" th:field="*{fullname}"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label th:for="email">Email</label>
+                        <input class="form-control" type="text" id="email" name="email" th:field="*{email}"/>
+                    </div>
+
+                </div>
+                <div class="form-group form-row">
+                    <div class="form-group col-md-4">
+                        <label th:for="contactNumber">Contact Number</label>
+                        <input class="form-control" type="text" id="contactNumber" name="contactNumber" th:field="*{contactNumber}"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="minimunSalary">Minimun Salary</label>
+                        <input class="form-control" type="text"  id="minimunSalary" th:field="*{minimunSalary}">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="workingTime">Working Time</label>
+                        <select id="workingTime" class="form-control" th:field="*{workingTime}">
+                            <option value="fulltime">Full-Time</option>
+                            <option value="parttime">Part-Time</option>
+                            <option value="both">Both</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group form-row col-md-6">
+                    <select class="form-control" th:field="*{academicDegreeName}">
+                        <option value="bachelorCS">Bachelor in Computer Science</option>
+                        <option value="bachelorE">Bachelor in Economy</option>
+                        <option value="mbaCS">MBA in ComputerScience</option>
+                    </select>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Skill Name</th>
+                        <th scope="col">Skill Level</th>
+                        <th scope="col">
+                            <button class="form-control" type="submit" name="addRow">Add Skill</button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="requirement,requirementStat : *{technicalSkillsList}">
+                        <td>
+                            <select class="form-control" th:field="*{technicalSkillsList[__${requirementStat.index}__].name}">
+                                <option value="Java">Java</option>
+                                <option value="Oracle">Oracle</option>
+                                <option value="Git">Git</option>
+                                <option value="Javascript">Javascript</option>
+                                <option value="JSP">JSP</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control" th:field="*{technicalSkillsList[__${requirementStat.index}__].level}">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="form-control" type="submit" name="removeRow"
+                                    th:value="${requirementStat.index}">Remove row</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <button name="save" class="form-control">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="footer"></div>
+</body>
+</html>

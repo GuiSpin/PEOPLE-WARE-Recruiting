@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div  th:fragment="applicantDetailTableFragment">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Fullname</th>
+                <th scope="col">Email</th>
+                <th scope="col">Contact Number</th>
+                <th scope="col">Minimun Salary</th>
+                <th scope="col">Working Time</th>
+                <th scope="col">Academic Degree</th>
+                <th scope="col">Technical Skills</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="applicant : ${applicantList}">
+                <td th:text="${{applicant.fullname}}">13/01/2011</td>
+                <td th:text="${{applicant.email}}">yes</td>
+                <td th:text="${{applicant.contactNumber}}">yes</td>
+                <td th:text="${{applicant.minimunSalary}}">yes</td>
+                <td th:text="${{applicant.workingTime}}">yes</td>
+                <td th:text="${{applicant.academicDegree.academicDegreeName}}">yes</td>
+                <td>
+                    <table>
+                        <tbody>
+                        <tr th:each="technicalSkill,technicalSkillStat : ${applicant.technicalSkillsList}">
+                            <td th:text="${technicalSkill.name}">Thymus Thymi</td>
+                            <td th:text="${technicalSkill.level}">Thymus Thymi</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

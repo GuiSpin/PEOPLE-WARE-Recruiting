@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Offer Detail</title>
+</head>
+<body>
+    <div th:replace="head"></div>
+    <div class="container">
+        <H3 class="text-center">Job Offer Details</H3>
+        <div class="form-row">
+            <div>
+                <label class="label label-default">Company Name: </label>
+                <label th:text="${jobOfferList[0].companyName}"></label>
+            </div>
+            <div>
+                <label class="label label-default">Contact Number: </label>
+                <label th:text="${jobOfferList[0].companyContactNumber}"></label>
+            </div>
+        </div>
+
+        <div th:replace="jobOfferDetailTableFragment"></div>
+
+        <H3 class="alignt-content-center">Applicants</H3>
+
+        <div th:replace="applicantDetailTableFragment"></div>
+
+        <div th:replace="footer"></div>
+
+    </div>
+</body>
+</html>
