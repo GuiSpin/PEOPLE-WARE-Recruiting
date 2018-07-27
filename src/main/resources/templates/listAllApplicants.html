@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List All Applicants</title>
+</head>
+<body>
+<div th:replace="head"></div>
+<div class="container" th:fragment="menu">
+    <H3  class="text-center"> List All Applicants</H3>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">FullName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Contact Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="applicant : ${applicantList}">
+            <td th:text="${{applicant.fullname}}"></td>
+            <td th:text="${{applicant.email}}"></td>
+            <td th:text="${{applicant.contactNumber}}"></td>
+            <td > <a th:href="@{/applicantDetail/{applicantId}(applicantId=${applicant.Id})}"><label>Details</label></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="footer"></div>
+</body>
+</html>

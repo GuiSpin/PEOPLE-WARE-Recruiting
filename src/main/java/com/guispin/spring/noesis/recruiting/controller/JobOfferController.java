@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -33,7 +34,7 @@ public class JobOfferController {
     }
 
     @RequestMapping(value = "/postJobOffer", method = RequestMethod.POST, params={"save"}, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ModelAndView postPagePostJobOffer(@ModelAttribute JobOffer jobOffer, ModelAndView mv) {
+    public ModelAndView postPagePostJobOffer(@ModelAttribute @Valid JobOffer jobOffer, ModelAndView mv) {
         jobOfferService.save(jobOffer);
 
         mv.setViewName("menu");
@@ -51,7 +52,7 @@ public class JobOfferController {
     public String removeAcademicRow(
             final JobOffer jobOffer, final BindingResult bindingResult,
             final HttpServletRequest req) {
-        final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
+        final Integer rowId = Integer.valueOf(req.getParameter("removeAcademicRow"));
         jobOffer.getAcademicDegreeList().remove(rowId.intValue());
         return "postJobOffer";
     }
@@ -66,7 +67,7 @@ public class JobOfferController {
     public String removeSkillRow(
             final JobOffer jobOffer, final BindingResult bindingResult,
             final HttpServletRequest req) {
-        final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
+        final Integer rowId = Integer.valueOf(req.getParameter("removeSkillRow"));
         jobOffer.getRequirementsList().remove(rowId.intValue());
         return "postJobOffer";
     }

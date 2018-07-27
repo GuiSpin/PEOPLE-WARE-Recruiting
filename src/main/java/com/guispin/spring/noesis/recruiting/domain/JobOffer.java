@@ -1,8 +1,10 @@
 package com.guispin.spring.noesis.recruiting.domain;
 
 import com.guispin.spring.noesis.recruiting.enums.WorkingTimeEnum;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +31,10 @@ public class JobOffer {
     @Column(name = "workingTime")
     private WorkingTimeEnum workingTime;
     @OneToMany(cascade = CascadeType.ALL)
+    @Size(min = 1)
     private List<AcademicDegree> academicDegreeList;
     @OneToMany(cascade = CascadeType.ALL)
+    @Size(min = 1)
     private List<Requirements> requirementsList;
 
     public String getCompanyName() {
